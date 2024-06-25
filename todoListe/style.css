@@ -1,0 +1,150 @@
+/*body{
+  background-image: url('https://img.freepik.com/vektoren-premium/lila-hintergrund-pastellfarben-gesprenkelte-randtextur-und-verschwommenes-grunge-design-im-alten-vintage-hintergrund_266878-501.jpg?w=360');
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: 100vw;
+}*/
+
+#logo{
+  color: rgb(230, 170, 245);
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 300%;
+}
+#spruch{
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-style: normal;
+  margin-bottom: 3vw;
+  color: #000000;
+}
+#anzeigenErledigt{
+  margin-top: 3vw;
+  margin-left: 25vw;
+
+}
+.search{
+  /*background-color:aliceblue;*/
+  background-color: #f6e4fb;
+  width: 25vw;
+  float: left;
+  margin-right: 1vw;
+  margin-left: 25vw;
+  border-width: 0px;
+  border-radius: 10px;
+  padding: 1%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+/*#font-family: 'overlock';*/
+  vertical-align: middle;
+}
+#hinzufuegen{
+  float: right;
+  margin-right: 25vw;
+  background-color: #d6a4e4;
+  border-width: 0px;
+  padding: 1%;
+  vertical-align: middle;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.popup {
+  display: none; 
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f6e4fb;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 40%;
+}
+.btnsPopup{
+  background-color: #b3a2b7;
+  border-width: 0px;
+  padding: 1%;
+  vertical-align: middle;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  float: right;
+  margin-left: 1%;
+  margin-right: 1%;
+  font-size: 120%;
+}
+.entry {
+  background: #f6e4fb;
+  padding: 10px;
+  margin: 10px;
+  width: 45%;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  border: 0px;
+  border-radius: 8px;
+  height: min-content;
+}
+
+.details {
+  display: none;
+}
+
+.eintraege {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-top: 1px solid #000;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.entry.expanded .details {
+  display: block;
+}
+#erweitern {
+  background-color: #f6e4fb;
+  border-width: 0px;
+  padding: 1%;
+  vertical-align: middle;
+  border-radius: 8px;
+  font-size: 150%;
+}
+#erweitern :hover{
+  color: blueviolet;
+}
+.rotate {
+  transform: rotate(180deg);
+  /*transition: transform 0.3s ease;*/
+}
+.btns{
+  background-color: #d6a4e4;
+  border-width: 0px;
+  padding: 1%;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  vertical-align: middle;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  float: right;
+  margin-left: 2px;
+  margin-right: 2px;
+  font-size: 120%;
+}
+.boxtitel{
+  font-size: 150%;
+  margin-left: 3%;
+}
+.abgehackt {
+  vertical-align: middle;
+  margin-right: 5px;
+  opacity: 0.5;
+}
+
+.completed {
+  opacity: 0.5;
+}
