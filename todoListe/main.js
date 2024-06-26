@@ -82,16 +82,26 @@ function addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, star
 
     let prioritaet = berechnePrioritaet(wichtig, dringend);
 
+    // Symbole entsprechend der Auswahl hinzufügen
+    let symbols = '';
+    if (dringend && wichtig) {
+        symbols = '&#8987; !'; 
+    } else if (dringend) {
+        symbols = '&#8987;'; 
+    } else if (wichtig) {
+        symbols = '!'; 
+    }
+
     entry.innerHTML = `
         <div class="header">
-            <input type="checkbox" name="abgehackt" class="abgehackt" onclick="updateErledigtProzent()"><b class="boxtitel">${titel}</b>
+            <input type="checkbox" name="abgehackt" class="abgehackt" onclick="updateErledigtProzent()"><b class="boxtitel">${titel}</b><div class="symbols">${symbols}</div>
             <p class="beschreibungEntry">Beschreibung: ${beschreibung}</p>
             <p class="enddatumEntry">Enddatum: ${enddatum}</p>
             <div class="details">
                 <p>Autor: ${autor}</p>
                 <p>Kategorie: ${kategorie}</p>
-                <p>Wichtig: ${wichtig? 'Ja' : 'Nein'}</p>
-                <p>Dringend: ${dringend? 'Ja' : 'Nein'}</p>
+                <p>Wichtig: ${wichtig ? 'Ja' : 'Nein'}</p>
+                <p>Dringend: ${dringend ? 'Ja' : 'Nein'}</p>
                 <p>Startdatum: ${startdatum}</p>
                 <p>Priorität: ${prioritaet}</p>
             </div>

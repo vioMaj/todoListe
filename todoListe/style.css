@@ -112,6 +112,7 @@
   font-size: 120%;
 }
 .entry {
+  position: relative;
   background: #f6e4fb;
   padding: 10px;
   margin: 10px;
@@ -119,7 +120,6 @@
   box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
-  border: 0px;
   border-radius: 8px;
   height: min-content;
 }
@@ -151,10 +151,20 @@
 #erweitern :hover{
   color: blueviolet;
 }
-.rotate {
-  transform: rotate(180deg);
-  /*transition: transform 0.3s ease;*/
+.symbol {
+  position: relative;
+  float: right;
+  font-size: 20px;
 }
+
+.symbol.dringend {
+  color: red;
+}
+
+.symbol.wichtig {
+  color: rgb(255, 0, 0);
+}
+
 .btns{
   background-color: #d6a4e4;
   border-width: 0px;
