@@ -144,11 +144,11 @@
     <div class="popup" id="hinzufuegenPop" style="display:none;">
         <form id="formHinzufuegen">
             <label for="titel">Titel:</label>
-            <input type="text" name="titel" id="titel" required> <br>
+            <input type="text" name="titel" id="titel" required> <br><br>
             <label for="beschreibung">Beschreibung:</label>
-            <textarea name="beschreibung" id="beschreibung" required></textarea><br>
+            <textarea name="beschreibung" id="beschreibung" required></textarea><br><br>
             <label for="autor">Autor:</label>
-            <input type="text" name="autor" id="autor" required><br>
+            <input type="text" name="autor" id="autor" required><br><br>
             <label for="kategorie">Kategorie:</label>
             <select name="kategorie" required>
                 <option value="default">Kategorie</option>
@@ -158,12 +158,13 @@
                 <option value="Arbeit">Arbeit</option>
                 <option value="Familie/Freunde">Familie/Freunde</option>
             </select>
-            <br>
+            <br><br>
             Wichtig<input type="checkbox" name="wichtig" id="wichtig">
             Dringend<input type="checkbox" name="dringend" id="dringend">
+            <br>
             <p id="prioritaet">Priorität: Weg damit</p>
             <label for="startdatum">Startdatum:</label>
-            <input type="date" name="startdatum" id="startdatum" required><br>
+            <input type="date" name="startdatum" id="startdatum" required><br><br>
             <label for="enddatum">Enddatum:</label>
             <input type="date" name="enddatum" id="enddatum" required><br>
             <button type="button" onclick="closeHinzufuegen()" class="btnsPopup">Abbrechen</button>
