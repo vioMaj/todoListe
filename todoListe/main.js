@@ -170,11 +170,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum);
 
+        //if (validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum)) {
+         //   addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
+          //  document.getElementById('formHinzufuegen').reset();
+          //  closeHinzufuegen();
+        //}
         if (validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum)) {
-            addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
-            document.getElementById('formHinzufuegen').reset();
-            closeHinzufuegen();
+            if (zuBearbeitenderEintrag) {
+                zuBearbeitenderEintrag.querySelector('.boxtitel').textContent = titel;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(2)').textContent = "Beschreibung: " + beschreibung;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(3)').textContent = "Autor: " + autor;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(4)').textContent = "Kategorie: " + kategorie;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(5)').textContent = "Wichtig: " + (wichtig ? 'Ja' : 'Nein');
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(6)').textContent = "Dringend: " + (dringend ? 'Ja' : 'Nein');
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(8)').textContent = "Startdatum: " + startdatum;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(1)').textContent = "Enddatum: " + enddatum;
+                zuBearbeitenderEintrag = null;
+            } else {
+                addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
+            }
         }
+        document.getElementById('formHinzufuegen').reset();
+        closeHinzufuegen();
     });
     // alle Eventlistener, die gebraucht werden (schaut, ob etwas bei den jeweiligen Elementen geändert werden)
     document.getElementById('wichtig').addEventListener('change', updatePrioritaet);
