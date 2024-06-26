@@ -1,8 +1,36 @@
-/*body{
-  background-image: url('https://img.freepik.com/vektoren-premium/lila-hintergrund-pastellfarben-gesprenkelte-randtextur-und-verschwommenes-grunge-design-im-alten-vintage-hintergrund_266878-501.jpg?w=360');
-  background-repeat: no-repeat;
-  background-position: center; 
-  background-size: 100vw;
+
+#grad {
+  background-image: linear-gradient(to bottom right, #f7effb, white);
+}
+
+/*.css-selector {
+  background: linear-gradient(222deg, #f3e3fb, #ffffff);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 28s ease infinite;
+  -moz-animation: AnimationName 28s ease infinite;
+  -o-animation: AnimationName 28s ease infinite;
+  animation: AnimationName 28s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0%{background-position:97% 0%}
+  50%{background-position:4% 100%}
+  100%{background-position:97% 0%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:97% 0%}
+  50%{background-position:4% 100%}
+  100%{background-position:97% 0%}
+}
+@-o-keyframes AnimationName {
+  0%{background-position:97% 0%}
+  50%{background-position:4% 100%}
+  100%{background-position:97% 0%}
+}
+@keyframes AnimationName {
+  0%{background-position:97% 0%}
+  50%{background-position:4% 100%}
+  100%{background-position:97% 0%}
 }*/
 
 #logo{
@@ -25,6 +53,12 @@
   margin-top: 3vw;
   margin-left: 25vw;
 
+}
+#beschreibung{
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 80px;
+  max-height: 90px;
 }
 .search{
   /*background-color:aliceblue;*/

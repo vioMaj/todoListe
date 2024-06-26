@@ -26,7 +26,7 @@ function deleteEintrag(button) {
     if (deleteBox == true) {
         let entry = button.closest('.entry');
         entry.remove();
-        updateErledigtProzent();
+        updateErledigtProzent();   
     }
 }
 
