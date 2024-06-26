@@ -1,10 +1,10 @@
 function searchResultat() {
-    const searchTerm = document.getElementById('searchbar').value.toLowerCase();
+    const suchwort = document.getElementById('searchbar').value.toLowerCase();
     const eintraege = document.querySelectorAll('.entry');
 
     eintraege.forEach(entry => {
         const title = entry.querySelector('.boxtitel').textContent.toLowerCase();
-        if (title.includes(searchTerm)) {
+        if (title.includes(suchwort)) {
             entry.style.display = 'block';
         } else {
             entry.style.display = 'none';
@@ -82,7 +82,7 @@ function toggleDetails(button) {
     button.querySelector('b').classList.toggle('rotate');
 }
 
-function updatePriority() {
+function updatePrioritaet() {
     const wichtig = document.getElementById('wichtig').checked;
     const dringend = document.getElementById('dringend').checked;
     const priorityElement = document.getElementById('prioritaet');
@@ -99,9 +99,65 @@ function updateErledigtProzent() {
     document.getElementById('anzeigenErledigt').textContent = `TODO's abgehakt: ${percent}%`;
 }
 
+function validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum){
+    let gut = true;
+
+    if (titel.length === 0) {
+        document.getElementById('errorTitel').textContent = "Titel wird benötigt.";
+        document.getElementById('errorTitel').style.display = 'inline';
+        gut = false;
+    }
+
+    if (titel.length > 255) {
+        document.getElementById('errorTitel').textContent = "Titel darf maximal 255 Zeichen lang sein.";
+        document.getElementById('errorTitel').style.display = 'inline';
+        gut = false;
+    }
+
+    if (beschreibung.length === 0) {
+        document.getElementById('errorBeschreibung').textContent = "Beschreibung wird benötigt.";
+        document.getElementById('errorBeschreibung').style.display = 'inline';
+        gut = false;
+    }
+
+    if (autor.length === 0) {
+        document.getElementById('errorAutor').textContent = "Autor wird benötigt.";
+        document.getElementById('errorAutor').style.display = 'inline';
+        gut = false;
+    }
+
+    if (autor.length > 20) {
+        document.getElementById('errorAutor').textContent = "Autor darf maximal 20 Zeichen lang sein.";
+        document.getElementById('errorAutor').style.display = 'inline';
+        gut = false;
+    }
+
+    if (kategorie === "default") {
+        document.getElementById('errorKategorie').textContent = "Kategorie wird benötigt.";
+        document.getElementById('errorKategorie').style.display = 'inline';
+        gut = false;
+    }
+
+    if (startdatum.length === 0) {
+        document.getElementById('errorStartdatum').textContent = "Startdatum wird benötigt.";
+        document.getElementById('errorStartdatum').style.display = 'inline';
+        gut = false;
+    }
+
+    if (enddatum.length === 0) {
+        document.getElementById('errorEnddatum').textContent = "Enddatum wird benötigt.";
+        document.getElementById('errorEnddatum').style.display = 'inline';
+        gut = false;
+    }
+
+    return gut;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('formHinzufuegen').addEventListener('submit', function(e) {
         e.preventDefault();
+
+        document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
 
         let titel = document.getElementById('titel').value;
         let beschreibung = document.getElementById('beschreibung').value;
@@ -112,23 +168,16 @@ document.addEventListener('DOMContentLoaded', function() {
         let startdatum = document.getElementById('startdatum').value;
         let enddatum = document.getElementById('enddatum').value;
 
-        if (titel.length === 0){
-            formHinzufuegen.innerHTML = 'Titel wird benötigt.';
-            return;
+        validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum);
+
+        if (validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum)) {
+            addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
+            document.getElementById('formHinzufuegen').reset();
+            closeHinzufuegen();
         }
-
-        if (titel.length > 255){
-            Text("Titel darf maximal 255 Zeichen lang sein.");
-            return;
-        }
-
-        addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
-
-        document.getElementById('formHinzufuegen').reset();
-        closeHinzufuegen();
     });
     // alle Eventlistener, die gebraucht werden (schaut, ob etwas bei den jeweiligen Elementen geändert werden)
-    document.getElementById('wichtig').addEventListener('change', updatePriority);
-    document.getElementById('dringend').addEventListener('change', updatePriority);
+    document.getElementById('wichtig').addEventListener('change', updatePrioritaet);
+    document.getElementById('dringend').addEventListener('change', updatePrioritaet);
     document.getElementById('searchbar').addEventListener('input', searchResultat);
 });
