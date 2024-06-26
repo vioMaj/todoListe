@@ -22,7 +22,7 @@ function closeHinzufuegen() {
 }
 
 function deleteEintrag(button) {
-    let deleteBox = window.confirm("Sind Sie sicher, dass Sie den ausgewählten Eintrag löschen wollen?");
+    let deleteBox = confirm("Sind Sie sicher, dass Sie den ausgewählten Eintrag löschen wollen?");
     if (deleteBox == true) {
         let entry = button.closest('.entry');
         entry.remove();
@@ -111,6 +111,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let dringend = document.getElementById('dringend').checked;
         let startdatum = document.getElementById('startdatum').value;
         let enddatum = document.getElementById('enddatum').value;
+
+        if (titel.length === 0){
+            alert("Titel wird benötigt.");
+            return;
+        }
+
+        if (titel.length > 255){
+            alert("Titel darf maximal 255 Zeichen lang sein.")
+        }
 
         addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
 
