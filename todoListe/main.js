@@ -13,6 +13,9 @@ function searchResultat() {
 }
 
 function openHinzufuegen() {
+    zuBearbeitenderEintrag = null;
+    document.getElementById('formTitel').textContent = "Eintrag hinzufügen";
+    document.getElementById('submitButton').textContent = "Hinzufügen";
     document.getElementById('hinzufuegenPop').style.display = 'block';
 }
 
@@ -30,10 +33,6 @@ function deleteEintrag(button) {
     }
 }
 
-function updateEintrag(button) {
-    // Funktion zur Aktualisierung eines Eintrags
-}
-
 function berechnePrioritaet(wichtig, dringend) {
     if (wichtig && dringend) {
         return 'schnell erledigen';
@@ -46,6 +45,36 @@ function berechnePrioritaet(wichtig, dringend) {
     }
 }
 
+function openBearbeiten(button) {
+    zuBearbeitenderEintrag = button.closest('.entry');
+
+    // Textinhalte der Felder ermitteln
+    const titel = zuBearbeitenderEintrag.querySelector('.boxtitel').textContent;
+    const beschreibung = zuBearbeitenderEintrag.querySelector('.beschreibungEntry').textContent.split(": ")[1];
+    const enddatum = zuBearbeitenderEintrag.querySelector('.enddatumEntry').textContent.split(": ")[1];
+    const autor = zuBearbeitenderEintrag.querySelector('.details p:nth-child(1)').textContent.split(": ")[1];
+    const kategorie = zuBearbeitenderEintrag.querySelector('.details p:nth-child(2)').textContent.split(": ")[1];
+    const wichtig = zuBearbeitenderEintrag.querySelector('.details p:nth-child(3)').textContent.split(": ")[1] === 'Ja';
+    const dringend = zuBearbeitenderEintrag.querySelector('.details p:nth-child(4)').textContent.split(": ")[1] === 'Ja';
+    const startdatum = zuBearbeitenderEintrag.querySelector('.details p:nth-child(5)').textContent.split(": ")[1];
+
+    // Werte in das Formular setzen
+    document.getElementById('formTitel').textContent = "Eintrag bearbeiten";
+    document.getElementById('submitButton').textContent = "Bestätigen";
+    document.getElementById('hinzufuegenPop').style.display = 'block';
+
+    document.getElementById('titel').value = titel;
+    document.getElementById('beschreibung').value = beschreibung;
+    document.getElementById('autor').value = autor;
+    document.querySelector('select[name="kategorie"]').value = kategorie;
+    document.getElementById('wichtig').checked = wichtig;
+    document.getElementById('dringend').checked = dringend;
+    document.getElementById('startdatum').value = startdatum;
+    document.getElementById('enddatum').value = enddatum;
+
+    updatePrioritaet();
+}
+
 function addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum) {
     let container = document.getElementById('eintraege');
     let entry = document.createElement('div');
@@ -56,18 +85,18 @@ function addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, star
     entry.innerHTML = `
         <div class="header">
             <input type="checkbox" name="abgehackt" class="abgehackt" onclick="updateErledigtProzent()"><b class="boxtitel">${titel}</b>
-            <p>Beschreibung: ${beschreibung}</p>
-            <p>Enddatum: ${enddatum}</p>
+            <p class="beschreibungEntry">Beschreibung: ${beschreibung}</p>
+            <p class="enddatumEntry">Enddatum: ${enddatum}</p>
             <div class="details">
                 <p>Autor: ${autor}</p>
                 <p>Kategorie: ${kategorie}</p>
-                <p>Wichtig: ${wichtig ? 'Ja' : 'Nein'}</p>
-                <p>Dringend: ${dringend ? 'Ja' : 'Nein'}</p>
-                <p>Priorität: ${prioritaet}</p>
+                <p>Wichtig: ${wichtig? 'Ja' : 'Nein'}</p>
+                <p>Dringend: ${dringend? 'Ja' : 'Nein'}</p>
                 <p>Startdatum: ${startdatum}</p>
+                <p>Priorität: ${prioritaet}</p>
             </div>
             <button onclick="toggleDetails(this)" id="erweitern"><b>&#11015;</b></button>
-            <button onclick="updateEintrag(this)" class="btns">&#x270E</button>
+            <button onclick="openBearbeiten(this)" class="btns">&#x270E</button>
             <button onclick="deleteEintrag(this)" class="btns">&#128465</button>
         </div>
     `;
@@ -168,32 +197,29 @@ document.addEventListener('DOMContentLoaded', function() {
         let startdatum = document.getElementById('startdatum').value;
         let enddatum = document.getElementById('enddatum').value;
 
-        validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum);
-
-        //if (validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum)) {
-         //   addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
-          //  document.getElementById('formHinzufuegen').reset();
-          //  closeHinzufuegen();
-        //}
         if (validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum)) {
             if (zuBearbeitenderEintrag) {
                 zuBearbeitenderEintrag.querySelector('.boxtitel').textContent = titel;
-                zuBearbeitenderEintrag.querySelector('.details p:nth-child(2)').textContent = "Beschreibung: " + beschreibung;
-                zuBearbeitenderEintrag.querySelector('.details p:nth-child(3)').textContent = "Autor: " + autor;
-                zuBearbeitenderEintrag.querySelector('.details p:nth-child(4)').textContent = "Kategorie: " + kategorie;
-                zuBearbeitenderEintrag.querySelector('.details p:nth-child(5)').textContent = "Wichtig: " + (wichtig ? 'Ja' : 'Nein');
-                zuBearbeitenderEintrag.querySelector('.details p:nth-child(6)').textContent = "Dringend: " + (dringend ? 'Ja' : 'Nein');
-                zuBearbeitenderEintrag.querySelector('.details p:nth-child(8)').textContent = "Startdatum: " + startdatum;
-                zuBearbeitenderEintrag.querySelector('.details p:nth-child(1)').textContent = "Enddatum: " + enddatum;
+                zuBearbeitenderEintrag.querySelector('p:nth-child(2)').textContent = "Beschreibung: " + beschreibung;
+                zuBearbeitenderEintrag.querySelector('p:nth-child(3)').textContent = "Enddatum: " + enddatum;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(1)').textContent = "Autor: " + autor;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(2)').textContent = "Kategorie: " + kategorie;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(3)').textContent = "Wichtig: " + (wichtig ? 'Ja' : 'Nein');
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(4)').textContent = "Dringend: " + (dringend ? 'Ja' : 'Nein');
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(5)').textContent = "Startdatum: " + startdatum;
+                zuBearbeitenderEintrag.querySelector('.details p:nth-child(6)').textContent = "Priorität: " + berechnePrioritaet(wichtig, dringend);
+
                 zuBearbeitenderEintrag = null;
+                document.getElementById('formHinzufuegen').reset();
+                closeHinzufuegen();
             } else {
                 addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
+                document.getElementById('formHinzufuegen').reset();
+                closeHinzufuegen();
             }
         }
-        document.getElementById('formHinzufuegen').reset();
-        closeHinzufuegen();
     });
-    // alle Eventlistener, die gebraucht werden (schaut, ob etwas bei den jeweiligen Elementen geändert werden)
+
     document.getElementById('wichtig').addEventListener('change', updatePrioritaet);
     document.getElementById('dringend').addEventListener('change', updatePrioritaet);
     document.getElementById('searchbar').addEventListener('input', searchResultat);
