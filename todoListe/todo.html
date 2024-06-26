@@ -22,12 +22,15 @@
             <label for="titel">Titel:</label>
             <input type="text" name="titel" id="titel">
             <span class="error" id="errorTitel"></span> <br><br>
+
             <label for="beschreibung">Beschreibung:</label>
             <textarea name="beschreibung" id="beschreibung" required></textarea>
             <span class="error" id="errorBeschreibung"></span> <br><br>
+
             <label for="autor">Autor:</label>
             <input type="text" name="autor" id="autor" required>
             <span class="error" id="errorAutor"></span> <br><br>
+
             <label for="kategorie">Kategorie:</label>
             <select name="kategorie" required>
                 <option value="default">Kategorie</option>
@@ -38,16 +41,20 @@
                 <option value="Familie/Freunde">Familie/Freunde</option>
             </select>
             <span class="error" id="errorKategorie"></span> <br><br>
+
             Wichtig<input type="checkbox" name="wichtig" id="wichtig">
             Dringend<input type="checkbox" name="dringend" id="dringend">
             <br>
+
             <p id="prioritaet">Priorität: Weg damit</p>
             <label for="startdatum">Startdatum:</label>
             <input type="date" name="startdatum" id="startdatum" required>
             <span class="error" id="errorStartdatum"></span> <br><br>
+
             <label for="enddatum">Enddatum:</label>
             <input type="date" name="enddatum" id="enddatum" required>
             <span class="error" id="errorEnddatum"></span> <br>
+            
             <button type="button" onclick="closeHinzufuegen()" class="btnsPopup">Abbrechen</button>
             <input type="submit" class="btnsPopup" value="Eintrag hinzufügen">
         </form>
