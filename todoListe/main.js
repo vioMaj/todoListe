@@ -200,8 +200,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum)) {
             if (zuBearbeitenderEintrag) {
                 zuBearbeitenderEintrag.querySelector('.boxtitel').textContent = titel;
-                zuBearbeitenderEintrag.querySelector('p:nth-child(2)').textContent = "Beschreibung: " + beschreibung;
-                zuBearbeitenderEintrag.querySelector('p:nth-child(3)').textContent = "Enddatum: " + enddatum;
+                zuBearbeitenderEintrag.querySelector('.beschreibungEntry').textContent = "Beschreibung: " + beschreibung;
+                zuBearbeitenderEintrag.querySelector('.enddatumEntry').textContent = "Enddatum: " + enddatum; 
                 zuBearbeitenderEintrag.querySelector('.details p:nth-child(1)').textContent = "Autor: " + autor;
                 zuBearbeitenderEintrag.querySelector('.details p:nth-child(2)').textContent = "Kategorie: " + kategorie;
                 zuBearbeitenderEintrag.querySelector('.details p:nth-child(3)').textContent = "Wichtig: " + (wichtig ? 'Ja' : 'Nein');
