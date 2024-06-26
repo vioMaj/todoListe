@@ -1,8 +1,8 @@
 function searchResultat() {
     const searchTerm = document.getElementById('searchbar').value.toLowerCase();
-    const entries = document.querySelectorAll('.entry');
+    const eintraege = document.querySelectorAll('.entry');
 
-    entries.forEach(entry => {
+    eintraege.forEach(entry => {
         const title = entry.querySelector('.boxtitel').textContent.toLowerCase();
         if (title.includes(searchTerm)) {
             entry.style.display = 'block';
@@ -113,12 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let enddatum = document.getElementById('enddatum').value;
 
         if (titel.length === 0){
-            alert("Titel wird benötigt.");
+            formHinzufuegen.innerHTML = 'Titel wird benötigt.';
             return;
         }
 
         if (titel.length > 255){
-            alert("Titel darf maximal 255 Zeichen lang sein.")
+            Text("Titel darf maximal 255 Zeichen lang sein.");
+            return;
         }
 
         addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum);
