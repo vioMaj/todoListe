@@ -139,11 +139,22 @@ function updateErledigtProzent() {
 
 function updateEintragFarbe(checkbox) {
     let entry = checkbox.closest('.entry');
+    let buttons = entry.querySelectorAll('button');  // Selektiert alle Buttons im Eintrag
+    let symbols = entry.querySelector('aside.symbols');  // Selektiert die Symbole
+    let toggleButton = entry.querySelector('#erweitern');  // Selektiert den Toggle-Button
+
     if (checkbox.checked) {
-        entry.style.backgroundColor = 'rgb(173, 47, 251);';
-        
+        entry.style.backgroundColor = '#b9b1bb';
+        buttons.forEach(button => button.style.display = 'none');  // Versteckt alle Buttons
+        if (symbols) {
+            symbols.style.display = 'none';  // Versteckt die Symbole
+        }
     } else {
         entry.style.backgroundColor = '#f6e4fb';
+        buttons.forEach(button => button.style.display = '');  // Zeigt alle Buttons wieder an
+        if (symbols) {
+            symbols.style.display = '';  // Zeigt die Symbole wieder an
+        }
     }
 }
 
