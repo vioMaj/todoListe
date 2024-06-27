@@ -141,10 +141,9 @@ function updateEintragFarbe(checkbox) {
     let entry = checkbox.closest('.entry');
     let buttons = entry.querySelectorAll('button');  // Selektiert alle Buttons im Eintrag
     let symbols = entry.querySelector('aside.symbols');  // Selektiert die Symbole
-    let toggleButton = entry.querySelector('#erweitern');  // Selektiert den Toggle-Button
 
     if (checkbox.checked) {
-        entry.style.backgroundColor = '#b9b1bb';
+        entry.style.backgroundColor = 'grey';
         buttons.forEach(button => button.style.display = 'none');  // Versteckt alle Buttons
         if (symbols) {
             symbols.style.display = 'none';  // Versteckt die Symbole
@@ -156,6 +155,18 @@ function updateEintragFarbe(checkbox) {
             symbols.style.display = '';  // Zeigt die Symbole wieder an
         }
     }
+    sortiereEintraege();
+}
+
+function sortiereEintraege() {
+    let container = document.getElementById('eintraege');
+    let entries = Array.from(container.getElementsByClassName('entry'));
+    entries.sort((a, b) => {
+        let aChecked = a.querySelector('.abgehackt').checked;
+        let bChecked = b.querySelector('.abgehackt').checked;
+        return aChecked - bChecked;  // Erledigte Einträge nach unten verschieben
+    });
+    entries.forEach(entry => container.appendChild(entry));
 }
 
 function validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum){
