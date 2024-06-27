@@ -60,7 +60,6 @@ function openBearbeiten(button) {
 
     // Werte in das Formular setzen
     document.getElementById('formTitel').textContent = "Eintrag bearbeiten";
-    document.getElementById('submitButton').textContent = "Bestätigen";
     document.getElementById('hinzufuegenPop').style.display = 'block';
 
     document.getElementById('titel').value = titel;
@@ -85,16 +84,16 @@ function addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, star
     // Symbole entsprechend der Auswahl hinzufügen
     let symbols = '';
     if (dringend && wichtig) {
-        symbols = '&#8987; !'; 
+        symbols = '<b>&#10710; !</b>'; 
     } else if (dringend) {
-        symbols = '&#8987;'; 
+        symbols = '<b>&#10710;</b>'; 
     } else if (wichtig) {
-        symbols = '!'; 
+        symbols = '<b>!</b>'; 
     }
 
     entry.innerHTML = `
         <div class="header">
-            <input type="checkbox" name="abgehackt" class="abgehackt" onclick="updateErledigtProzent()"><b class="boxtitel">${titel}</b><div class="symbols">${symbols}</div>
+            <input type="checkbox" name="abgehackt" class="abgehackt" onclick="updateErledigtProzent(); updateEintragFarbe(this);"><b class="boxtitel">${titel}</b><aside class="symbols">${symbols}</aside>
             <p class="beschreibungEntry">Beschreibung: ${beschreibung}</p>
             <p class="enddatumEntry">Enddatum: ${enddatum}</p>
             <div class="details">
@@ -105,7 +104,7 @@ function addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, star
                 <p>Startdatum: ${startdatum}</p>
                 <p>Priorität: ${prioritaet}</p>
             </div>
-            <button onclick="toggleDetails(this)" id="erweitern"><b>&#11015;</b></button>
+            <button onclick="toggleDetails(this)" id="erweitern" class="erweitern"><b>&#11021;</b></button>
             <button onclick="openBearbeiten(this)" class="btns">&#x270E</button>
             <button onclick="deleteEintrag(this)" class="btns">&#128465</button>
         </div>
@@ -136,6 +135,16 @@ function updateErledigtProzent() {
     const checked = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
     const percent = total === 0 ? 0 : Math.round((checked / total) * 100);
     document.getElementById('anzeigenErledigt').textContent = `TODO's abgehakt: ${percent}%`;
+}
+
+function updateEintragFarbe(checkbox) {
+    let entry = checkbox.closest('.entry');
+    if (checkbox.checked) {
+        entry.style.backgroundColor = 'rgb(173, 47, 251);';
+        
+    } else {
+        entry.style.backgroundColor = '#f6e4fb';
+    }
 }
 
 function validieren(titel, beschreibung, autor, kategorie, startdatum, enddatum){
