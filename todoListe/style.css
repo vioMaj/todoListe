@@ -26,7 +26,6 @@
   max-height: 90px;
 }
 .search{
-  /*background-color:aliceblue;*/
   background-color: #f6e4fb;
   width: 25vw;
   float: left;
@@ -36,7 +35,6 @@
   border-radius: 10px;
   padding: 1%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-/*#font-family: 'overlock';*/
   vertical-align: middle;
 }
 #hinzufuegen{
