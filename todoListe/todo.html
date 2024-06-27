@@ -7,13 +7,12 @@
     <title>toDoListe</title>
 </head>
 <body>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="main.js"></script>
-    <div id="grad">
-    <h1 id="logo">&#9775 TODO Liste</h1>
+    <div>
+    <h1 id="logo">&#9775; TODO Liste</h1>
     <h2 id="spruch">Deine originelle Liste. Dein organisiertes Leben.</h2>
 
-    <input id="searchbar" class="search" type="search" placeholder="&#8981   Eintrag suchen..." onkeypress="if(event.keyCode === 13) searchResultat();">
+    <input id="searchbar" class="search" type="search" placeholder="&#8981;   Eintrag suchen..." onkeypress="if(event.keyCode === 13) searchResultat();">
     <button id="hinzufuegen" onclick="openHinzufuegen()">Eintrag hinzufügen +</button><br>
     <p id="anzeigenErledigt">TODO's abgehakt: 0%</p>
     </div>

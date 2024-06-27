@@ -95,6 +95,18 @@ function openBearbeiten(button) {
     // Priorität im Formular aktualisieren
     updatePrioritaet();
 }
+// passt die Symbole nach der Bearbeitung eines Eintrags ein
+function updateSymbols(entry, wichtig, dringend) {
+    let symbols = '';
+    if (dringend && wichtig) {
+        symbols = '<b>&#10710; !</b>'; 
+    } else if (dringend) {
+        symbols = '<b>&#10710;</b>'; 
+    } else if (wichtig) {
+        symbols = '<b>!</b>'; 
+    }
+    entry.querySelector('aside.symbols').innerHTML = symbols;
+}
 
 // Funktion zum Hinzufügen eines neuen Eintrags oder Aktualisieren eines bestehenden Eintrags
 function addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, startdatum, enddatum) {
@@ -132,8 +144,8 @@ function addDaten(titel, beschreibung, autor, kategorie, wichtig, dringend, star
                 <p>Priorität: ${prioritaet}</p>
             </div>
             <button onclick="toggleDetails(this)" id="erweitern" class="erweitern"><b>&#11021;</b></button>
-            <button onclick="openBearbeiten(this)" class="btns">&#x270E</button>
-            <button onclick="deleteEintrag(this)" class="btns">&#128465</button>
+            <button onclick="openBearbeiten(this)" class="btns">&#x270E;</button>
+            <button onclick="deleteEintrag(this)" class="btns">&#128465;</button>
         </div>
     `;
 
@@ -297,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 zuBearbeitenderEintrag.querySelector('.details p:nth-child(4)').textContent = "Dringend: " + (dringend ? 'Ja' : 'Nein');
                 zuBearbeitenderEintrag.querySelector('.details p:nth-child(5)').textContent = "Startdatum: " + startdatum;
                 zuBearbeitenderEintrag.querySelector('.details p:nth-child(6)').textContent = "Priorität: " + berechnePrioritaet(wichtig, dringend);
+                updateSymbols(zuBearbeitenderEintrag, wichtig, dringend);
 
                 // Formular und Bearbeitungsstatus zurücksetzen
                 zuBearbeitenderEintrag = null;
